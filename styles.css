@@ -470,12 +470,10 @@ body {
 
 .cell.ladder {
   background: linear-gradient(45deg, #28a745, #20c997);
-  color: white;
 }
 
 .cell.snake {
   background: linear-gradient(45deg, #dc3545, #fd7e14);
-  color: white;
 }
 
 .cell.start {
@@ -756,33 +754,374 @@ body.theme-classic .cell {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .game-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+  /* Solo cambiar gameBoard en móviles */
+  #gameBoard .game-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
   }
 
-  .control-panel,
-  .players-panel {
-    grid-column: 1;
+  #gameBoard .control-panel {
+    order: 1;
+    padding: 10px;
+    margin-bottom: 5px;
   }
 
-  .board-container {
-    grid-column: 1;
-    grid-row: 2;
+  /* Mejorar elementos del control panel en móvil */
+  .control-panel .current-player {
+    margin-bottom: 10px;
+  }
+
+  .control-panel .current-player h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .control-panel .player-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    margin: 5px auto;
+  }
+
+  .control-panel .dice-container {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .control-panel .dice-result {
+    font-size: 1.2rem;
+    margin-top: 5px;
+  }
+
+  .control-panel .game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .control-panel .game-controls .btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    margin: 2px;
+  }
+
+  #gameBoard .board-container {
+    order: 2;
+    display: flex;
+    justify-content: center;
+  }
+
+  #gameBoard .players-panel {
+    order: 3;
+    padding: 10px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #gameBoard #playersStatus {
+    display: flex;
+  }
+
+  /* Optimizar elementos del players panel en móvil */
+  .players-panel h4 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .players-panel .players-status {
+    gap: 8px;
+  }
+
+  .players-panel .player-status {
+    padding: 8px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .players-panel .status-avatar {
+    width: 25px;
+    height: 25px;
+    font-size: 0.9rem;
+  }
+
+  /* Layout horizontal para players panel en móvil */
+  .players-panel .players-status {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 5px;
+  }
+
+  .players-panel .player-status {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+  }
+
+  .players-panel .player-status .status-avatar {
+    margin-bottom: 3px;
   }
 
   .board {
     width: 100%;
-    max-width: 400px;
-    height: 400px;
+    max-width: min(85vw, 400px);
+    height: min(85vw, 400px);
     margin: 0 auto;
   }
 
-  .title {
-    font-size: 2.5rem;
+  .cell {
+    font-size: 0.7rem;
+  }
+
+  .cell.special {
+    font-size: 0.6rem;
+  }
+
+  .dice {
+    width: 60px;
+    height: 60px;
+  }
+
+  .token {
+    width: 14px;
+    height: 14px;
+    font-size: 8px;
+    border-width: 1px;
+  }
+
+  /* PlayerSetup responsive */
+  .player-inputs {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin: 20px 0;
+  }
+
+  .count-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+
+  .avatar-option {
+    font-size: 1.3rem;
   }
 
   .theme-selector {
     grid-template-columns: 1fr;
   }
+
+  /* Mejoras táctiles mínimas */
+  .btn {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  .count-btn {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  .avatar-option {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  .player-input input {
+    font-size: 16px; /* Evitar zoom en iOS */
+  }
+}
+
+@media (max-width: 480px) {
+  .board {
+    max-width: min(90vw, 350px);
+    height: min(90vw, 350px);
+  }
+
+  .cell {
+    font-size: 0.6rem;
+    min-width: 30px;
+    min-height: 30px;
+  }
+
+  .cell.special {
+    font-size: 0.5rem;
+  }
+
+  .dice {
+    width: 50px;
+    height: 50px;
+  }
+
+  .count-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 0.9rem;
+  }
+
+  .avatar-option {
+    font-size: 1.1rem;
+  }
+
+  .token {
+    width: 12px;
+    height: 12px;
+    font-size: 7px;
+  }
+
+  /* Control panel extra compacto en móviles pequeños */
+  .control-panel {
+    padding: 8px;
+  }
+
+  .control-panel .current-player h3 {
+    font-size: 0.9rem;
+    margin-bottom: 3px;
+  }
+
+  .control-panel .player-avatar {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+    margin: 3px auto;
+  }
+
+  .control-panel .dice-container {
+    margin: 8px 0;
+  }
+
+  .control-panel .dice-result {
+    font-size: 1rem;
+    margin-top: 3px;
+  }
+
+  .control-panel .game-controls .btn {
+    padding: 6px 10px;
+    font-size: 11px;
+    margin: 1px;
+  }
+
+  /* Players panel extra compacto en móviles pequeños */
+  .players-panel {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #gameBoard #playersStatus {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+  }
+
+  .players-panel h4 {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+
+  .players-panel .players-status {
+    gap: 3px;
+  }
+
+  .players-panel .player-status {
+    padding: 6px;
+    font-size: 0.8rem;
+    margin: 1px;
+  }
+
+  .players-panel .status-avatar {
+    width: 22px;
+    height: 22px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  #gameBoard .game-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  #gameBoard .control-panel {
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+  }
+
+  #gameBoard .board-container {
+    flex: 2;
+  }
+
+  #gameBoard .players-panel {
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+  }
+
+  .board {
+    max-width: min(50vh, 350px);
+    height: min(50vh, 350px);
+  }
+
+  /* Players panel en landscape vuelve a layout vertical */
+  .players-panel .players-status {
+    flex-direction: column;
+  }
+
+  .players-panel .player-status {
+    flex-direction: row;
+    min-width: auto;
+    max-width: none;
+    text-align: left;
+  }
+}
+
+/* ===== BOTONES DE CONFIGURACIÓN ===== */
+.setup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.setup-buttons .btn {
+  min-width: 140px;
+}
+
+/* Layout horizontal compacto del control panel en móviles */
+.control-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.control-panel .current-player {
+  flex: 1;
+  min-width: 120px;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.control-panel .dice-container {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.control-panel .game-controls {
+  flex: 1;
+  justify-content: flex-end;
+  margin-top: 0;
 }
